@@ -147,7 +147,11 @@ PrefabInstance:
     - target: {fileID: 1770527631626565078, guid: c878d51262ded53489dcdc7f4b67bf7c, type: 3}
       propertyPath: m_Material
       value: 
-      objectReference: {fileID: 2100000, guid: 62c3123d35778c445980586c2081d334, type: 2}
+      objectReference: {fileID: 2100000, guid: 65b321c7fca256949b4bd5a329196cb3, type: 2}
+    - target: {fileID: 7274533406329753084, guid: c878d51262ded53489dcdc7f4b67bf7c, type: 3}
+      propertyPath: category
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8048003206229877262, guid: c878d51262ded53489dcdc7f4b67bf7c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -222,7 +226,11 @@ PrefabInstance:
     - target: {fileID: 1770527631626565078, guid: c878d51262ded53489dcdc7f4b67bf7c, type: 3}
       propertyPath: m_Material
       value: 
-      objectReference: {fileID: 2100000, guid: 5dc039164cebbd2419bb319e86658767, type: 2}
+      objectReference: {fileID: 2100000, guid: 65b321c7fca256949b4bd5a329196cb3, type: 2}
+    - target: {fileID: 7274533406329753084, guid: c878d51262ded53489dcdc7f4b67bf7c, type: 3}
+      propertyPath: category
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8048003206229877262, guid: c878d51262ded53489dcdc7f4b67bf7c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -461,7 +469,11 @@ PrefabInstance:
     - target: {fileID: 1770527631626565078, guid: c878d51262ded53489dcdc7f4b67bf7c, type: 3}
       propertyPath: m_Material
       value: 
-      objectReference: {fileID: 2100000, guid: 20f5d1bd0ce64a74cb8f23302f306afa, type: 2}
+      objectReference: {fileID: 2100000, guid: 65b321c7fca256949b4bd5a329196cb3, type: 2}
+    - target: {fileID: 7274533406329753084, guid: c878d51262ded53489dcdc7f4b67bf7c, type: 3}
+      propertyPath: category
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8048003206229877262, guid: c878d51262ded53489dcdc7f4b67bf7c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -573,7 +585,11 @@ PrefabInstance:
     - target: {fileID: 1770527631626565078, guid: c878d51262ded53489dcdc7f4b67bf7c, type: 3}
       propertyPath: m_Material
       value: 
-      objectReference: {fileID: 2100000, guid: 4865f5168631c504b849ccea5b650f22, type: 2}
+      objectReference: {fileID: 2100000, guid: 65b321c7fca256949b4bd5a329196cb3, type: 2}
+    - target: {fileID: 7274533406329753084, guid: c878d51262ded53489dcdc7f4b67bf7c, type: 3}
+      propertyPath: category
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8048003206229877262, guid: c878d51262ded53489dcdc7f4b67bf7c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -857,6 +873,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2019396385}
   - component: {fileID: 2019396384}
+  - component: {fileID: 2019396386}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -898,6 +915,43 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2019396386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2019396383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 885e6ede87c40427483f6f07cd1a53c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  assets:
+  - name: eye1a
+    category: 3
+    texture: {fileID: 2800000, guid: 081f2607cc18f4d4eb781442668f394f, type: 3}
+  - name: eye1b
+    category: 3
+    texture: {fileID: 2800000, guid: a33ebeaa607b4af4d8c734d5b45d27a4, type: 3}
+  - name: eye2a
+    category: 3
+    texture: {fileID: 2800000, guid: a775d2d630160064eb4faa5ee29ff4b3, type: 3}
+  - name: eye2b
+    category: 3
+    texture: {fileID: 2800000, guid: a4d636754181e554fb109510d4063db3, type: 3}
+  - name: nose1
+    category: 4
+    texture: {fileID: 2800000, guid: 35420e0c014767041ae9f40d7fd6cd82, type: 3}
+  - name: nose2
+    category: 4
+    texture: {fileID: 2800000, guid: 7871098aabc90ae4bb20c3cab7584e49, type: 3}
+  - name: mouse1
+    category: 5
+    texture: {fileID: 2800000, guid: ef19934c2e6f20949b66f916c32c554b, type: 3}
+  - name: mouse2
+    category: 5
+    texture: {fileID: 2800000, guid: b6fc1c80f28faa644bcfcf686433cd40, type: 3}
 --- !u!1 &2054539579
 GameObject:
   m_ObjectHideFlags: 0
