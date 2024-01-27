@@ -13,7 +13,6 @@ public class DecalMover : MonoBehaviour
     public GameObject planeGO;
 
     public Asset.Category category;
-
     float startTime;
 
     void Start()
@@ -59,6 +58,7 @@ public class DecalMover : MonoBehaviour
 
     float getCurrentTimeInPosition()
     {
-        return 0f + (Time.time - this.startTime);
+        float result = 0f + (Time.time - this.startTime) * GameManager.Instance.gameSpeed;
+        return result;
     }
 }

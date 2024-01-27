@@ -4,10 +4,24 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
     public int currentIndex = 0;
     DecalMover currentDecalMover = null;
     public List<GameObject> gameOrder = new List<GameObject>();
     public int currentMaximumFaceProperties = 0;
+    public float gameSpeed = 1f;
     // Start is called before the first frame update
     void Start()
     {
