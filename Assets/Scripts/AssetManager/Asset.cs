@@ -9,4 +9,5 @@ public class Asset : MonoBehaviour
 
     public string name;
     public Category category;
+    public Texture texture;
 }

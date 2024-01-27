@@ -22,14 +22,14 @@ public class AssetManager : MonoBehaviour
         }
     }
 
-    public GameObject GetRandomAssetOfCategory(Asset.Category category)
+    public Texture GetRandomAssetOfCategory(Asset.Category category)
     {
         var filteredList = assets.Where(asset => asset.category == category).ToList();
-        return filteredList[Random.Range(0, filteredList.Count)].gameObject;
+        return filteredList[Random.Range(0, filteredList.Count)].texture;
     }
 
-    public GameObject GetAssetWithName(string name)
+    public Texture GetAssetWithName(string name)
     {
-        return assets.FirstOrDefault(asset => asset.name.Equals(name)).gameObject;
+        return assets.FirstOrDefault(asset => asset.name.Equals(name)).texture;
     }
 }

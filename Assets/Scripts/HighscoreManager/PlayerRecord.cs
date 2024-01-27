@@ -14,5 +14,5 @@ public struct PlayerRecord
 public struct FacialFeature
 {
     public string Name;
-    public Transform Transform;
+    public Vector3 Position;
 }

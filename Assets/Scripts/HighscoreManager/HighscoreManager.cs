@@ -9,152 +9,38 @@ using UnityEngine;
 
 public class HighscoreManager : MonoBehaviour
 {
-    public static HighscoreManager Instance { get; private set; }
+    public static HighscoreManager _instance { get; private set; }
 
-    public List<PlayerRecord> playerRecords = new List<PlayerRecord>();
+    public List<PlayerRecord> currentPlayerRecords = new List<PlayerRecord>();
 
-    [SerializeField]
-    private Transform face, eyeLeft, eyeRight, mouth;
-
-    private string fileName = "highscores.csv";
+    public HighscoreList highScoreList;
 
     private void Awake()
     {
-        if (Instance != null)
+        if (_instance != null)
         {
             Destroy(this);
         }
         else
         {
-            Instance = this;
+            _instance = this;
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        AddScore(new PlayerRecord
-        {
-            playerName = "Tycho",
-            highScore = UnityEngine.Random.Range(10, 1000),
-            facialFeatures = new List<FacialFeature>
-            {
-                new FacialFeature
-                {
-                    Name = "Face",
-                    Transform = face.transform
-                },
-                new FacialFeature
-                {
-                    Name = "EyeLeft",
-                    Transform = eyeLeft.transform
-                },
-                new FacialFeature
-                {
-                    Name = "EyeRight",
-                    Transform = eyeLeft.transform
-                },
-                new FacialFeature
-                {
-                    Name = "Mouth",
-                    Transform = eyeLeft.transform
-                }
-            }
-        });
-
-        AddScore(new PlayerRecord
-        {
-            playerName = "Tycho",
-            highScore = UnityEngine.Random.Range(10, 1000),
-            facialFeatures = new List<FacialFeature>
-            {
-                new FacialFeature
-                {
-                    Name = "Face",
-                    Transform = face.transform
-                },
-                new FacialFeature
-                {
-                    Name = "EyeLeft",
-                    Transform = eyeLeft.transform
-                },
-                new FacialFeature
-                {
-                    Name = "EyeRight",
-                    Transform = eyeLeft.transform
-                },
-                new FacialFeature
-                {
-                    Name = "Mouth",
-                    Transform = eyeLeft.transform
-                }
-            }
-        });
-
-        AddScore(new PlayerRecord
-        {
-            playerName = "Tycho",
-            highScore = UnityEngine.Random.Range(10, 1000),
-            facialFeatures = new List<FacialFeature>
-            {
-                new FacialFeature
-                {
-                    Name = "Face",
-                    Transform = face.transform
-                },
-                new FacialFeature
-                {
-                    Name = "EyeLeft",
-                    Transform = eyeLeft.transform
-                },
-                new FacialFeature
-                {
-                    Name = "EyeRight",
-                    Transform = eyeLeft.transform
-                },
-                new FacialFeature
-                {
-                    Name = "Mouth",
-                    Transform = eyeLeft.transform
-                }
-            }
-        });
-
-        StoreHighScore();
     }
 
     public void AddScore(PlayerRecord playerRecord)
     {
-        playerRecords.Add(playerRecord);
+        currentPlayerRecords.Add(playerRecord);
     }
 
-    public void StoreHighScore()
+    public void StoreHighestScore()
     {
-        var playerRecord = playerRecords.OrderByDescending(playerRecord => playerRecord.highScore).ToList().FirstOrDefault();
-
-        var sb = new StringBuilder();
-        sb.Append(playerRecord.playerName + ";");
-        sb.Append(playerRecord.highScore + ";");
-        sb.Append("[");
-
-        foreach (var facialFeature in playerRecord.facialFeatures)
-        {
-            sb.Append(facialFeature.Name + ":");
-            sb.Append(facialFeature.Transform.position + ","
-                + facialFeature.Transform.rotation + ","
-                + facialFeature.Transform.localScale + "-");
-        }
-
-        sb.Append("]");
-        sb.AppendLine(";");
-
-        File.AppendAllText(fileName, sb.ToString());
-
-        Debug.LogError("Done storing highscore");
+        var sortedPlayerRecords = currentPlayerRecords.OrderByDescending(playerRecord => playerRecord.highScore);
+        highScoreList.highScores.Add(sortedPlayerRecords.FirstOrDefault());
     }
 
-    public void LoadData()
+    public List<PlayerRecord> LoadHighscores(int xAmount)
     {
-
+        var sortedPlayerRecords = highScoreList.highScores.OrderByDescending(playerRecord => playerRecord.highScore);
+        return sortedPlayerRecords.Take(xAmount).ToList();
     }
 }
