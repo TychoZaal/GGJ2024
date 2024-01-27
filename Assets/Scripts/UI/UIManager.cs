@@ -22,11 +22,15 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void SpawnText(string text, Vector3 coordinates, float offset)
+    public void SpawnText(string text, Vector3 coordinates, float maxOffset, float minOffset)
     {
+        float offset = Random.Range(minOffset, maxOffset);
+        bool negative = Random.Range(0.0f, 1.0f) > 0.5f;
+        offset = negative ? offset * -1.5f : offset;
+
         var textObject = Instantiate(canvas, coordinates +
-            new Vector3(Random.Range(coordinates.x - offset, coordinates.x + offset),
-                Random.Range(coordinates.y, coordinates.y + offset), 0), Quaternion.identity, transform);
+            new Vector3(coordinates.x + offset,
+                negative ? coordinates.y + -offset : coordinates.y + offset, 0), Quaternion.identity, transform);
         textObject.GetComponentInChildren<TextMeshProUGUI>().text = text;
         textObject.transform.localEulerAngles = new Vector3(0, 0, Random.Range(-25, 25));
 
@@ -34,13 +38,5 @@ public class UIManager : MonoBehaviour
         textObject.GetComponent<Animator>().SetFloat("Speed", 1 / duration);
 
         Destroy(textObject.gameObject, duration);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SpawnText("+" + Random.Range(0, 1000), new Vector3(0, 0, -0.75f), 0.5f);
-        }
     }
 }

@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using System.Linq;
 
 public class DecalMover : MonoBehaviour
 {
@@ -12,8 +14,21 @@ public class DecalMover : MonoBehaviour
 
     public GameObject planeGO;
 
+    [SerializeField] private List<Transform> expectedLandingPositions = new List<Transform>();
+
     public Asset.Category category;
     float startTime;
+
+    private Vector3 hitPoint = Vector3.positiveInfinity;
+    private Vector3 expectedLanding = Vector3.positiveInfinity;
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(hitPoint, 0.1f);
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(expectedLanding, 0.1f);
+    }
 
     void Start()
     {
@@ -49,11 +64,27 @@ public class DecalMover : MonoBehaviour
                 {
                     Destroy(this.transform.parent.gameObject);
                 }
+
+                hitPoint = hit.point;
             }
+
+            ShowScore(hit.point);
 
             this.isStopped = true;
             planeGO.SetActive(false);
         }
+    }
+
+    private Vector3 FindNearestLandingPosition(Vector3 hitPosition)
+    {
+        expectedLanding = expectedLandingPositions.OrderBy(landingPosition => Vector3.Distance(hitPosition, landingPosition.position)).FirstOrDefault().transform.position;
+        return expectedLandingPositions.OrderBy(landingPosition => Vector3.Distance(hitPosition, landingPosition.position)).FirstOrDefault().transform.position;
+    }
+    
+    private void ShowScore(Vector3 hitPosition)
+    { 
+        string score = ScoreCalculator.Instance.CalculateScore(FindNearestLandingPosition(hitPosition), hitPosition).ToString();
+        UIManager.Instance.SpawnText("+" + score, hitPosition, 1.50f, 1.85f);
     }
 
     float getCurrentTimeInPosition()

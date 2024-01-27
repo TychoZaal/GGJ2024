@@ -33,6 +33,7 @@ Transform:
   - {fileID: 857250115042892512}
   - {fileID: 4650940675706239977}
   - {fileID: 6357453078072713032}
+  - {fileID: 6627748120757167793}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1748894123208625865
@@ -203,6 +204,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8048003206229877262}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7063908464561472692
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6627748120757167793}
+  m_Layer: 0
+  m_Name: ExpectedLandingLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6627748120757167793
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7063908464561472692}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.117, z: 0.577}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8048003206229877262}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6592489111758406030
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -271,6 +303,14 @@ PrefabInstance:
       propertyPath: startLocation
       value: 
       objectReference: {fileID: 1179689716366151836}
+    - target: {fileID: 4578309777859464306, guid: b0eb29c70935efd48a0756a9ffdd4ad8, type: 3}
+      propertyPath: expectedLandingPositions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578309777859464306, guid: b0eb29c70935efd48a0756a9ffdd4ad8, type: 3}
+      propertyPath: expectedLandingPositions.Array.data[0]
+      value: 
+      objectReference: {fileID: 6627748120757167793}
     - target: {fileID: 4895153770840781912, guid: b0eb29c70935efd48a0756a9ffdd4ad8, type: 3}
       propertyPath: m_Size.z
       value: 6
