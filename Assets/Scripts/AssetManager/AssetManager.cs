@@ -5,8 +5,11 @@ using UnityEngine;
 
 public class AssetManager : MonoBehaviour
 {
-    [SerializeField]
     private List<Asset> assets = new List<Asset>();
+
+    private string nosePath = "Art/FaceParts/Noses";
+    private string mouthPath = "Art/FaceParts/Mouths/";
+    private string eyePath = "Art/FaceParts/Eyes/";
 
     public static AssetManager Instance { get; private set; }
 
@@ -19,6 +22,26 @@ public class AssetManager : MonoBehaviour
         else
         {
             Instance = this;
+        }
+
+        AddFromPath(nosePath, Asset.Category.NOSE);
+        AddFromPath(mouthPath, Asset.Category.MOUTH);
+        AddFromPath(eyePath, Asset.Category.EYE);
+
+    }
+
+    private void AddFromPath(string resourcePath, Asset.Category cat)
+    {
+        var textures = Resources.LoadAll(resourcePath, typeof(Texture2D));
+        foreach (var texture in textures)
+        {
+              //new asset with name, category, and texture
+            Asset newAsset = new Asset();
+            newAsset.name = texture.name;
+            newAsset.category = cat;
+            newAsset.texture = (Texture)texture;
+            //add to list
+            assets.Add(newAsset);
         }
     }
 
