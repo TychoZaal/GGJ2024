@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DecalMover : MonoBehaviour
 {
-    public bool isStopped;
+    public bool isStopped = false;
 
     [SerializeField]
     Transform startLocation;
