@@ -46,7 +46,7 @@ public class HighscoreDummyFeeder : MonoBehaviour
 
         foreach (FacialFeature facialFeature in topScore.facialFeatures)
         {
-            Instantiate(decalProjector, facialFeature.Position, Quaternion.identity, null);
+            GameObject decal = Instantiate(decalProjector, facialFeature.Position, Quaternion.identity, null);
         }
     }
 }
