@@ -9,6 +9,8 @@ public class DecalMover : MonoBehaviour
     [SerializeField]
     Transform endLocation;
 
+    public GameObject planeGO;
+
     float startTime;
 
     void Start()
@@ -31,6 +33,7 @@ public class DecalMover : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             this.isStopped = true;
+            planeGO.SetActive(false);
         }
     }
 
