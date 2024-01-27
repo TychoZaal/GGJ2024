@@ -4,6 +4,22 @@ using UnityEngine;
 
 public class MoveHookAlongRail : MonoBehaviour
 {
+    //public static MoveHookAlongRail Instance { get; private set; }
+
+
+    //private void Awake()
+    //{
+    //    if (Instance != null)
+    //    {
+    //        Destroy(this);
+    //    }
+    //    else
+    //    {
+    //        Instance = this;
+    //    }
+    //}
+
+    [SerializeField] GameObject spawnPosition;
     [SerializeField] List<GameObject> movepoints;
     // Start is called before the first frame update
     void Start()
@@ -18,9 +34,20 @@ public class MoveHookAlongRail : MonoBehaviour
         //sequence.append(LeanTween.move(gameObject, movepoints[3].transform.position, 3.0f).setEase(LeanTweenType.easeInOutQuad));
     }
 
-    // Update is called once per frame
-    void Update()
+    public void TriggerMoveAway(GameObject hook)
     {
-        
+        LTSeq sequence = LeanTween.sequence();
+
+        sequence.append(LeanTween.move(hook, movepoints[0].transform.position, 2.0f).setEase(LeanTweenType.easeInOutQuad));
+        sequence.append(LeanTween.move(hook, movepoints[1].transform.position, 0.1f));
+        sequence.append(LeanTween.move(hook, movepoints[2].transform.position, 3.0f).setEase(LeanTweenType.easeInOutQuad));
+        sequence.append(LeanTween.move(hook, movepoints[4].transform.position, 0.1f));
+        sequence.append(LeanTween.move(hook, movepoints[3].transform.position, 3.0f).setEase(LeanTweenType.easeInOutQuad));
     }
+
+    public void TriggerSpawnAnimation(GameObject hook)
+    {
+        LeanTween.move(hook, spawnPosition.transform.position, 1.0f).setEase(LeanTweenType.easeInOutQuad);
+    }
+
 }

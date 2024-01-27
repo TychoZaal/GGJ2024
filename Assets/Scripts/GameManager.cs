@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+
     private void Awake()
     {
         if (Instance != null)
@@ -19,18 +20,32 @@ public class GameManager : MonoBehaviour
     }
     public int currentIndex = 0;
     DecalMover currentDecalMover = null;
-    public List<GameObject> gameOrder = new List<GameObject>();
+    private List<GameObject> gameOrder;
+
+    public GameObject hangingGuyPrefab = null;
+    public HaningGuy hangingGuyScript = null;
+    private GameObject currentGuy = null;
+    private GameObject hook = null;
+
+    [SerializeField] private MoveHookAlongRail mhar;
+    [SerializeField] private Transform spawnPos;
+
     public int currentMaximumFaceProperties = 0;
     public float gameSpeed = 1f;
     // Start is called before the first frame update
+
+    bool isDone = false;
     void Start()
     {
-        if (gameOrder.Count <= 0)
-        {
-            return;
-        }
 
-        currentMaximumFaceProperties = gameOrder.Count;
+        //if (gameOrder.Count <= 0)
+        //{
+        //    return;
+        //}
+
+        //currentMaximumFaceProperties = gameOrder.Count;
+
+        InitializeNewGuy();
         SetCurrentActiveObject();
     }
 
@@ -42,13 +57,33 @@ public class GameManager : MonoBehaviour
             currentIndex++;
             if (currentIndex >= currentMaximumFaceProperties)
             {
-                Debug.Log("done");
+                if (!isDone)
+                {
+                    Debug.Log("done");
+                    isDone = true;
+                    mhar.TriggerMoveAway(hook);
+                    InitializeNewGuy();
+                    SetCurrentActiveObject();
+                }
             }
             else
             {
                 SetCurrentActiveObject();
             }
         }
+    }
+
+    void InitializeNewGuy()
+    {
+        GameObject currentGuy = Instantiate(hangingGuyPrefab, new Vector3(spawnPos.position.x, 0.0f, 0.0f), new Quaternion());
+        hangingGuyScript = currentGuy.GetComponent<HaningGuy>();
+        hook = hangingGuyScript.hook;
+        gameOrder = hangingGuyScript.DecalProjectors;
+        currentMaximumFaceProperties = gameOrder.Count;
+        isDone = false;
+        currentIndex = 0;
+        mhar.TriggerSpawnAnimation(hook);
+
     }
 
     void SetCurrentActiveObject()
