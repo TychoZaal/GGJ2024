@@ -81,10 +81,14 @@ public class DecalMover : MonoBehaviour
         return expectedLandingPositions.OrderBy(landingPosition => Vector3.Distance(hitPosition, landingPosition.position)).FirstOrDefault().transform.position;
     }
     
-    private void ShowScore(Vector3 hitPosition)
-    { 
-        string score = ScoreCalculator.Instance.CalculateScore(FindNearestLandingPosition(hitPosition), hitPosition).ToString();
-        UIManager.Instance.SpawnText("+" + score, hitPosition, 1.50f, 1.85f);
+    public void ShowScore(Vector3 hitPosition)
+    {
+        int score = ScoreCalculator.Instance.CalculateScore(FindNearestLandingPosition(hitPosition), hitPosition);
+        HighscoreManager._instance.AddScore(new PlayerRecord
+        {
+            playerName = HighscoreManager._instance.playerName,
+            highScore = score
+        });
     }
 
     float getCurrentTimeInPosition()

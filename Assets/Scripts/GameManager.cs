@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour
                 if (!isDone)
                 {
                     Debug.Log("done");
+                    HighscoreManager._instance.Invoke("AssessCreatedCharacter", 2.0f);
                     isDone = true;
                     mhar.TriggerMoveAway(hook);
                     InitializeNewGuy();

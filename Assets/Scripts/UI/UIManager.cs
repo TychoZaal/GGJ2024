@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private Animator canvas;
     [SerializeField] private float duration = 1.0f;
+    [SerializeField] private List<Color> colors = new List<Color>();
 
     private void Awake()
     {
@@ -22,16 +23,21 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void SpawnText(string text, Vector3 coordinates, float maxOffset, float minOffset)
+    public void SpawnText(string text, Transform transform)
     {
-        float offset = Random.Range(minOffset, maxOffset);
-        bool negative = Random.Range(0.0f, 1.0f) > 0.5f;
-        offset = negative ? offset * -1.5f : offset;
+        var textObject = Instantiate(canvas, Vector3.zero, Quaternion.identity, transform);
 
-        var textObject = Instantiate(canvas, coordinates +
-            new Vector3(coordinates.x + offset,
-                negative ? coordinates.y + -offset : coordinates.y + offset, 0), Quaternion.identity, transform);
-        textObject.GetComponentInChildren<TextMeshProUGUI>().text = text;
+        var textMesh = textObject.GetComponentInChildren<TextMeshProUGUI>();
+        string textColored = $"";
+
+        foreach (char c in text)
+        {
+            Color color = colors[Random.Range(0, colors.Count)];
+            textColored += $"{c.ToString().AddColor(color)}";
+        }
+
+        textMesh.SetText(textColored);
+
         textObject.transform.localEulerAngles = new Vector3(0, 0, Random.Range(-25, 25));
 
         textObject.GetComponent<Animator>().SetTrigger("Scale");
@@ -39,4 +45,10 @@ public class UIManager : MonoBehaviour
 
         Destroy(textObject.gameObject, duration);
     }
+}
+
+public static class StringExtensions
+{
+    public static string AddColor(this string text, Color col) => $"<color={ColorHexFromUnityColor(col)}>{text}</color>";
+    public static string ColorHexFromUnityColor(this Color unityColor) => $"#{ColorUtility.ToHtmlStringRGBA(unityColor)}";
 }
