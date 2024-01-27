@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4390274170846351662}
   - component: {fileID: 7820731772002409121}
   - component: {fileID: 464660391118665768}
-  - component: {fileID: 6584346478191366243}
   m_Layer: 0
   m_Name: eye
   m_TagString: Untagged
@@ -106,18 +105,3 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6584346478191366243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2365931641995944275}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c08b672f9ca234f9a93357846ba47d63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: eyeSphere
-  category: 3
-  texture: {fileID: 2800000, guid: 081f2607cc18f4d4eb781442668f394f, type: 3}

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3882811398374943942}
   - component: {fileID: 958374038109668905}
   - component: {fileID: 440137869040483542}
-  - component: {fileID: 3701167199339085113}
   m_Layer: 0
   m_Name: mouth
   m_TagString: Untagged
@@ -106,18 +105,3 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3701167199339085113
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2669173139857027550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c08b672f9ca234f9a93357846ba47d63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: mouthSphere
-  category: 5
-  texture: {fileID: 2800000, guid: b6fc1c80f28faa644bcfcf686433cd40, type: 3}
