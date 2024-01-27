@@ -32,6 +32,10 @@ public class DecalMover : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            RaycastHit hit;
+
+
+
             this.isStopped = true;
             planeGO.SetActive(false);
         }
