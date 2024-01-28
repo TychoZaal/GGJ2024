@@ -9,15 +9,7 @@ public class tent : MonoBehaviour
         if (other.CompareTag("guy"))
         {
             GetComponent<Animator>().SetTrigger("tent");
-
-
             HighscoreManager._instance.StartCoroutine(HighscoreManager._instance.AssessCreatedCharacter());
-
-
-
-
-            Debug.Log("sloeppie");
-
         }
     }
     // Start is called before the first frame update
