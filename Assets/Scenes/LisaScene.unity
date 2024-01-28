@@ -965,7 +965,7 @@ MonoBehaviour:
   currentIndex: 0
   hangingGuyPrefab: {fileID: 4535046467459077067, guid: b0086906a4d9d86449ffd0fe006ce8f1, type: 3}
   hangingGuyScript: {fileID: 0}
-  secondsToPlay: 45
+  secondsToPlay: 35
   secondsPassed: 0
   timeLeftText: {fileID: 1092543341}
   mhar: {fileID: 254255345}
