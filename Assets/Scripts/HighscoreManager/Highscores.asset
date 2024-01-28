@@ -12,7 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e6d8a703ab7140778f32f55e1daf81e, type: 3}
   m_Name: Highscores
   m_EditorClassIdentifier: 
-  highScores:
-  - playerName: japie
-    highScore: 707
-    facialFeatures: []
+  highScores: []

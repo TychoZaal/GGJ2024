@@ -118,7 +118,7 @@ public class DecalMover : MonoBehaviour
         int score = ScoreCalculator.Instance.CalculateScore(FindNearestLandingPosition(hitPosition), hitPosition);
         HighscoreManager._instance.AddScore(new PlayerRecord
         {
-            playerName = HighscoreManager._instance.playerName,
+            playerName = StartGameManager.Instance.playerName,
             highScore = score
         });
 

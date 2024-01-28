@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -79,6 +80,7 @@ public class GameManager : MonoBehaviour
     {
         timeLeftText.text = string.Empty;
         HighscoreManager._instance.StoreHighestScore();
+        SceneManager.LoadScene("GameEnd");
     }
 
     // Update is called once per frame

@@ -25,12 +25,12 @@ public class HighscoreManager : MonoBehaviour
 
     public List<AudioClip> hahaClips = new List<AudioClip>();
 
-    public string playerName = "japie";
-
     int hahaAmount = 0, hahaPlaced = 0, hahaClip = 0;
 
     private void Awake()
     {
+        DontDestroyOnLoad(gameObject);
+
         if (_instance != null)
         {
             Destroy(this);
@@ -45,6 +45,11 @@ public class HighscoreManager : MonoBehaviour
     {
         currentPlayerRecords.Add(playerRecord);
         allCurrentPlayerRecords.Add(playerRecord);
+    }
+
+    public int GetHighscore()
+    {
+        return currentScore;
     }
 
     public IEnumerator AssessCreatedCharacter()
@@ -78,8 +83,11 @@ public class HighscoreManager : MonoBehaviour
 
     public void StoreHighestScore()
     {
-        var sortedPlayerRecords = allCurrentPlayerRecords.OrderByDescending(playerRecord => playerRecord.highScore);
-        highScoreList.highScores.Add(sortedPlayerRecords.FirstOrDefault());
+        highScoreList.highScores.Add(new PlayerRecord
+        {
+            highScore = allCurrentPlayerRecords.Sum(pr => pr.highScore),
+            playerName = StartGameManager.Instance.playerName
+        });
     }
 
     public List<PlayerRecord> LoadHighscores(int xAmount)
