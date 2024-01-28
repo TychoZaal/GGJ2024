@@ -1014,6 +1014,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlankRagdoll
       objectReference: {fileID: 0}
+    - target: {fileID: 8044540247604209655, guid: 386df7f768bbacd4882cb230f37e31dc, type: 3}
+      propertyPath: m_TagString
+      value: guy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

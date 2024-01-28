@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
     IEnumerator WaitBeforeSpawningNextGuy()
     {
         yield return new WaitForSeconds(1f);
-        HighscoreManager._instance.Invoke("calljatoch", 2.0f);
+
         mhar.TriggerMoveAway(hook);
         InitializeNewGuy();
         SetCurrentActiveObject();
