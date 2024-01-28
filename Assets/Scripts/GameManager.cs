@@ -73,6 +73,7 @@ public class GameManager : MonoBehaviour
         {
             decal.SetActive(true);
             decal.GetComponent<DecalMover>().isStopped = true;
+            decal.transform.localEulerAngles = new Vector3(decal.transform.localEulerAngles.x, decal.transform.localEulerAngles.y, 0);
             decal.transform.parent.gameObject.SetActive(true);
         }
 
