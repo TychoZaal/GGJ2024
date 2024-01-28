@@ -41,7 +41,12 @@ public class HighscoreManager : MonoBehaviour
         currentPlayerRecords.Add(playerRecord);
     }
 
-    public void AssessCreatedCharacter()
+    public void calljatoch()
+    {
+        StartCoroutine(AssessCreatedCharacter());
+    }
+
+    public IEnumerator AssessCreatedCharacter()
     {
         currentScore += currentPlayerRecords.Sum(cpr => cpr.highScore);
         double average = currentPlayerRecords.Average(rec => rec.highScore);
@@ -51,6 +56,7 @@ public class HighscoreManager : MonoBehaviour
 
         for (int i = 0; i < hahaPlaced; i++)
         {
+            yield return new WaitForSeconds(UnityEngine.Random.Range(0, 0.3f));
             UIManager.Instance.SpawnText(string.Concat(Enumerable.Repeat("HA", hahaAmount)) + "!", hahaPlacements[i].transform);
         }
 

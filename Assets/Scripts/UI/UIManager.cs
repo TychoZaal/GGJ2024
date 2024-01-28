@@ -26,6 +26,8 @@ public class UIManager : MonoBehaviour
     public void SpawnText(string text, Transform transform)
     {
         var textObject = Instantiate(canvas, Vector3.zero, Quaternion.identity, transform);
+        textObject.transform.position = transform.position;
+        textObject.transform.localEulerAngles = new Vector3(0, Random.Range(-25, 25), 0);
 
         var textMesh = textObject.GetComponentInChildren<TextMeshProUGUI>();
         string textColored = $"";
@@ -40,8 +42,15 @@ public class UIManager : MonoBehaviour
 
         textObject.transform.localEulerAngles = new Vector3(0, 0, Random.Range(-25, 25));
 
+        float time = 0, goal = Random.Range(0, 0.7f);
+
+        while (time < goal)
+        {
+            time += Time.deltaTime;
+        }
+
         textObject.GetComponent<Animator>().SetTrigger("Scale");
-        textObject.GetComponent<Animator>().SetFloat("Speed", 1 / duration);
+        textObject.GetComponent<Animator>().SetFloat("Speed", 1 / (duration + Random.Range(0, 0.75f)));
 
         Destroy(textObject.gameObject, duration);
     }

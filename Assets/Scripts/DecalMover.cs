@@ -89,7 +89,7 @@ public class DecalMover : MonoBehaviour
                     return;
                 }
                 //hitPoint = hit.point;
-                //ShowScore(hit.point);
+                ShowScore(hit.point);
 
                 this.isStopped = true;
             }
