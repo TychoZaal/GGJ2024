@@ -934,6 +934,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1934963734770364196}
     m_Modifications:
+    - target: {fileID: 173814316562451609, guid: 386df7f768bbacd4882cb230f37e31dc, type: 3}
+      propertyPath: m_Radius
+      value: 0.006
+      objectReference: {fileID: 0}
+    - target: {fileID: 173814316562451609, guid: 386df7f768bbacd4882cb230f37e31dc, type: 3}
+      propertyPath: m_Center.y
+      value: 0.0046
+      objectReference: {fileID: 0}
     - target: {fileID: 2385009190343088567, guid: 386df7f768bbacd4882cb230f37e31dc, type: 3}
       propertyPath: m_LocalScale.x
       value: 4.951679
@@ -984,6 +992,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2385009190343088567, guid: 386df7f768bbacd4882cb230f37e31dc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711580433325510483, guid: 386df7f768bbacd4882cb230f37e31dc, type: 3}
+      propertyPath: m_CollisionDetection
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7551452025169796869, guid: 386df7f768bbacd4882cb230f37e31dc, type: 3}

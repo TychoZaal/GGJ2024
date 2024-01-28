@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -59,11 +60,8 @@ public class GameManager : MonoBehaviour
             {
                 if (!isDone)
                 {
-                    Debug.Log("done");
                     isDone = true;
-                    mhar.TriggerMoveAway(hook);
-                    InitializeNewGuy();
-                    SetCurrentActiveObject();
+                    StartCoroutine(WaitBeforeSpawningNextGuy());
                 }
             }
             else
@@ -71,6 +69,15 @@ public class GameManager : MonoBehaviour
                 SetCurrentActiveObject();
             }
         }
+    }
+
+    IEnumerator WaitBeforeSpawningNextGuy()
+    {
+        yield return new WaitForSeconds(1f);
+        //HighscoreManager._instance.Invoke("AssessCreatedCharacter", 2.0f);
+        mhar.TriggerMoveAway(hook);
+        InitializeNewGuy();
+        SetCurrentActiveObject();
     }
 
     void InitializeNewGuy()
