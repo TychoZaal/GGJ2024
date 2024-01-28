@@ -10,6 +10,7 @@ public class tent : MonoBehaviour
         {
             GetComponent<Animator>().SetTrigger("tent");
             HighscoreManager._instance.StartCoroutine(HighscoreManager._instance.AssessCreatedCharacter());
+            other.transform.parent.gameObject.SetActive(false);
         }
     }
     // Start is called before the first frame update
