@@ -25,10 +25,10 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void SpawnText(string text, Transform transform, List<Color> colorPallette)
+    public void SpawnText(string text, Transform transform, List<Color> colorPallette, float offset = 0)
     {
         var textObject = Instantiate(canvas, Vector3.zero, Quaternion.identity, transform);
-        textObject.transform.position = transform.position;
+        textObject.transform.position = transform.position + new Vector3(NegativeRandom(offset), NegativeRandom(offset), 0);
         textObject.transform.localEulerAngles = new Vector3(0, Random.Range(-25, 25), 0);
 
         var textMesh = textObject.GetComponentInChildren<TextMeshProUGUI>();
@@ -55,6 +55,12 @@ public class UIManager : MonoBehaviour
         textObject.GetComponent<Animator>().SetFloat("Speed", 1 / (duration + Random.Range(0, 0.75f)));
 
         Destroy(textObject.gameObject, duration);
+    }
+
+    private float NegativeRandom(float value)
+    {
+        float rangeValue = Random.Range(0, value);
+        return Random.Range(0.0f, 1.0f) > 0.5f ? rangeValue : rangeValue * -1;
     }
 }
 

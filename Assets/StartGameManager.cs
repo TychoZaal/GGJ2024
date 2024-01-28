@@ -11,6 +11,8 @@ public class StartGameManager : MonoBehaviour
 
     public static StartGameManager Instance;
 
+    bool klaar;
+
     private void Awake()
     {
         if (Instance != null)
@@ -27,10 +29,11 @@ public class StartGameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return) && !klaar)
         {
             playerName = playerNameText.text;
             SceneManager.LoadScene("LisaScene");
+            klaar = true;
         }
     }
 }

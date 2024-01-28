@@ -122,7 +122,7 @@ public class DecalMover : MonoBehaviour
             highScore = score
         });
 
-        UIManager.Instance.SpawnText("+" + score, UIManager.Instance.playerHeadTextLocations[Random.Range(0, UIManager.Instance.playerHeadTextLocations.Count)], UIManager.Instance.pointColors);
+        UIManager.Instance.SpawnText("+" + score, UIManager.Instance.playerHeadTextLocations[Random.Range(0, UIManager.Instance.playerHeadTextLocations.Count)], UIManager.Instance.pointColors, 1.5f);
     }
 
     public void MockShowScore()
