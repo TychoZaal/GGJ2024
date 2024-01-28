@@ -35,6 +35,9 @@ public class GameManager : MonoBehaviour
     public float gameSpeed = 1f;
     // Start is called before the first frame update
 
+    [HideInInspector] public bool canPressSpace = false;
+
+
     bool isDone = false;
     void Start()
     {
@@ -60,6 +63,7 @@ public class GameManager : MonoBehaviour
             {
                 if (!isDone)
                 {
+                    canPressSpace = false;
                     isDone = true;
                     StartCoroutine(WaitBeforeSpawningNextGuy());
                 }
@@ -74,7 +78,6 @@ public class GameManager : MonoBehaviour
     IEnumerator WaitBeforeSpawningNextGuy()
     {
         yield return new WaitForSeconds(1f);
-
         mhar.TriggerMoveAway(hook);
         InitializeNewGuy();
         SetCurrentActiveObject();
