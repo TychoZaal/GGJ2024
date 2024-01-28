@@ -13,36 +13,6 @@ MonoBehaviour:
   m_Name: Highscores
   m_EditorClassIdentifier: 
   highScores:
-  - playerName: Tycho
-    highScore: 459
-    facialFeatures:
-    - Name: eyeSphere
-      Position: {x: -0.189, y: 0.082, z: -0.401}
-    - Name: eyeSphere
-      Position: {x: 0.139, y: 0.082, z: -0.401}
-    - Name: faceSphere
-      Position: {x: 0, y: 0, z: 0}
-    - Name: mouthSphere
-      Position: {x: 0.019, y: -0.139, z: -0.401}
-  - playerName: Tycho
-    highScore: 525
-    facialFeatures:
-    - Name: eyeSphere
-      Position: {x: -0.189, y: 0.082, z: -0.401}
-    - Name: eyeSphere
-      Position: {x: 0.139, y: 0.082, z: -0.401}
-    - Name: faceSphere
-      Position: {x: 0, y: 0, z: 0}
-    - Name: mouthSphere
-      Position: {x: 0.019, y: -0.139, z: -0.401}
-  - playerName: Tycho
-    highScore: 950
-    facialFeatures:
-    - Name: eyeSphere
-      Position: {x: -0.307, y: 0.082, z: -0.351}
-    - Name: eyeSphere
-      Position: {x: 0.209, y: 0.166, z: -0.366}
-    - Name: faceSphere
-      Position: {x: 0, y: 0, z: 0}
-    - Name: mouthSphere
-      Position: {x: 0.019, y: -0.192, z: -0.374}
+  - playerName: japie
+    highScore: 707
+    facialFeatures: []
