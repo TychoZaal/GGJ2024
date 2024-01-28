@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -28,8 +29,13 @@ public class GameManager : MonoBehaviour
     private GameObject currentGuy = null;
     private GameObject hook = null;
 
+    [SerializeField] public int secondsToPlay = 60, secondsPassed = 0;
+    [SerializeField] public TextMeshProUGUI timeLeftText;
+
     [SerializeField] private MoveHookAlongRail mhar;
     [SerializeField] private Transform spawnPos;
+
+    [SerializeField] private AudioClip belt;
 
     public int currentMaximumFaceProperties = 0;
     public float gameSpeed = 1f;
@@ -51,6 +57,28 @@ public class GameManager : MonoBehaviour
 
         InitializeNewGuy();
         SetCurrentActiveObject();
+        StartCoroutine(GameTimer());
+    }
+
+    private IEnumerator GameTimer ()
+    {
+        timeLeftText.text = secondsToPlay.ToString();
+
+        while (secondsPassed < secondsToPlay)
+        {
+            yield return new WaitForSeconds(1);
+            secondsPassed += 1;
+
+            timeLeftText.text = (secondsToPlay - secondsPassed).ToString();
+        }
+
+        EndGame();
+    }
+
+    private void EndGame()
+    {
+        timeLeftText.text = string.Empty;
+        HighscoreManager._instance.StoreHighestScore();
     }
 
     // Update is called once per frame
@@ -65,6 +93,8 @@ public class GameManager : MonoBehaviour
                 {
                     canPressSpace = false;
                     isDone = true;
+                    HighscoreManager._instance.CalculateCreatedCharacterScore();
+                    SoundManager._instance.PlaySound(transform, belt, 1.0f);
                     StartCoroutine(WaitBeforeSpawningNextGuy());
                 }
             }

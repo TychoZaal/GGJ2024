@@ -12,6 +12,8 @@ public class DecalMover : MonoBehaviour
     [SerializeField]
     Transform endLocation;
 
+    [SerializeField] private AudioClip stitch;
+
     [SerializeField] private List<Transform> expectedLandingPositions = new List<Transform>();
 
     public Asset.Category category;
@@ -110,12 +112,17 @@ public class DecalMover : MonoBehaviour
     
     public void ShowScore(Vector3 hitPosition)
     {
+        SoundManager._instance.PlaySound(transform, stitch, 1.0f, 0.2f);
+        ScreenShaker.Instance.StartCoroutine(ScreenShaker.Instance.Shake(0.15f, 0.2f));
+
         int score = ScoreCalculator.Instance.CalculateScore(FindNearestLandingPosition(hitPosition), hitPosition);
         HighscoreManager._instance.AddScore(new PlayerRecord
         {
             playerName = HighscoreManager._instance.playerName,
             highScore = score
         });
+
+        UIManager.Instance.SpawnText("+" + score, UIManager.Instance.playerHeadTextLocations[Random.Range(0, UIManager.Instance.playerHeadTextLocations.Count)], UIManager.Instance.pointColors);
     }
 
     float getCurrentTimeInPosition()

@@ -72,6 +72,7 @@ MonoBehaviour:
   isStopped: 0
   startLocation: {fileID: 0}
   endLocation: {fileID: 0}
+  stitch: {fileID: 8300000, guid: c4282950d31c84896ad9c80efbae5b16, type: 3}
   expectedLandingPositions:
   - {fileID: 0}
   category: 3

@@ -12,6 +12,7 @@ public class HighscoreManager : MonoBehaviour
     public static HighscoreManager _instance { get; private set; }
 
     public List<PlayerRecord> currentPlayerRecords = new List<PlayerRecord>();
+    public List<PlayerRecord> allCurrentPlayerRecords = new List<PlayerRecord>();
 
     public HighscoreList highScoreList;
 
@@ -22,7 +23,11 @@ public class HighscoreManager : MonoBehaviour
     [SerializeField]
     public List<Transform> hahaPlacements = new List<Transform>();
 
+    public List<AudioClip> hahaClips = new List<AudioClip>();
+
     public string playerName = "japie";
+
+    int hahaAmount = 0, hahaPlaced = 0, hahaClip = 0;
 
     private void Awake()
     {
@@ -39,34 +44,41 @@ public class HighscoreManager : MonoBehaviour
     public void AddScore(PlayerRecord playerRecord)
     {
         currentPlayerRecords.Add(playerRecord);
-    }
-
-    public void calljatoch()
-    {
-        StartCoroutine(AssessCreatedCharacter());
+        allCurrentPlayerRecords.Add(playerRecord);
     }
 
     public IEnumerator AssessCreatedCharacter()
     {
-        currentScore += currentPlayerRecords.Sum(cpr => cpr.highScore);
-        double average = currentPlayerRecords.Average(rec => rec.highScore);
-        double success = average / ScoreCalculator.Instance.perfectScore;
-        int hahaAmount = Mathf.CeilToInt((float)success * maxHahaPerText);
-        int hahaPlaced = Mathf.CeilToInt((float)success * hahaPlacements.Count);
+        AudioClip clip = hahaClips[hahaClip];
 
         for (int i = 0; i < hahaPlaced; i++)
         {
             yield return new WaitForSeconds(UnityEngine.Random.Range(0, 0.3f));
-            UIManager.Instance.SpawnText(string.Concat(Enumerable.Repeat("HA", hahaAmount)) + "!", hahaPlacements[i].transform);
+            UIManager.Instance.SpawnText(string.Concat(Enumerable.Repeat("HA", hahaAmount)) + "!", hahaPlacements[i].transform, UIManager.Instance.hahaColors);
         }
+        SoundManager._instance.PlaySound(hahaPlacements[hahaPlaced], clip, 1.0f, 0.4f);
 
+        hahaAmount = 0;
+        hahaPlaced = 0;
+        hahaClip = 0;
         Shuffle(hahaPlacements);
+    }
+
+    public void CalculateCreatedCharacterScore()
+    {
+        currentScore += currentPlayerRecords.Sum(cpr => cpr.highScore);
+        double average = currentPlayerRecords.Average(rec => rec.highScore);
+        double success = average / ScoreCalculator.Instance.perfectScore;
+        hahaAmount = Mathf.CeilToInt((float)success * maxHahaPerText);
+        hahaPlaced = Mathf.CeilToInt((float)success * hahaPlacements.Count);
+        hahaClip = Mathf.CeilToInt((float)success * hahaClips.Count);
+
         currentPlayerRecords.Clear();
     }
 
     public void StoreHighestScore()
     {
-        var sortedPlayerRecords = currentPlayerRecords.OrderByDescending(playerRecord => playerRecord.highScore);
+        var sortedPlayerRecords = allCurrentPlayerRecords.OrderByDescending(playerRecord => playerRecord.highScore);
         highScoreList.highScores.Add(sortedPlayerRecords.FirstOrDefault());
     }
 

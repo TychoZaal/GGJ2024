@@ -9,7 +9,9 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private Animator canvas;
     [SerializeField] private float duration = 1.0f;
-    [SerializeField] private List<Color> colors = new List<Color>();
+    [SerializeField] public List<Color> hahaColors = new List<Color>();
+    [SerializeField] public List<Color> pointColors = new List<Color>();
+    [SerializeField] public List<Transform> playerHeadTextLocations = new List<Transform>();
 
     private void Awake()
     {
@@ -23,7 +25,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void SpawnText(string text, Transform transform)
+    public void SpawnText(string text, Transform transform, List<Color> colorPallette)
     {
         var textObject = Instantiate(canvas, Vector3.zero, Quaternion.identity, transform);
         textObject.transform.position = transform.position;
@@ -34,7 +36,7 @@ public class UIManager : MonoBehaviour
 
         foreach (char c in text)
         {
-            Color color = colors[Random.Range(0, colors.Count)];
+            Color color = colorPallette[Random.Range(0, colorPallette.Count)];
             textColored += $"{c.ToString().AddColor(color)}";
         }
 
