@@ -73,6 +73,7 @@ public class GameManager : MonoBehaviour
         {
             decal.SetActive(true);
             decal.GetComponent<DecalMover>().isStopped = true;
+            decal.transform.localEulerAngles = new Vector3(decal.transform.localEulerAngles.x, decal.transform.localEulerAngles.y, 0);
             decal.transform.parent.gameObject.SetActive(true);
         }
 
@@ -136,7 +137,7 @@ public class GameManager : MonoBehaviour
                     canPressSpace = false;
                     isDone = true;
                     HighscoreManager._instance.CalculateCreatedCharacterScore();
-                    SoundManager._instance.PlaySound(transform, belt, 1.0f);
+                    SoundManager._instance.PlaySound(transform, belt, 0.5f);
                     StartCoroutine(WaitBeforeSpawningNextGuy());
                 }
             }
@@ -165,7 +166,6 @@ public class GameManager : MonoBehaviour
         isDone = false;
         currentIndex = 0;
         mhar.TriggerSpawnAnimation(hook);
-
     }
 
     void SetCurrentActiveObject()
