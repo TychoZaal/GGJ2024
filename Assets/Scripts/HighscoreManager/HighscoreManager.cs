@@ -74,9 +74,9 @@ public class HighscoreManager : MonoBehaviour
         currentScore += currentPlayerRecords.Sum(cpr => cpr.highScore);
         double average = currentPlayerRecords.Average(rec => rec.highScore);
         double success = average / ScoreCalculator.Instance.perfectScore;
-        hahaAmount = Mathf.CeilToInt((float)success * maxHahaPerText);
-        hahaPlaced = Mathf.CeilToInt((float)success * hahaPlacements.Count);
-        hahaClip = Mathf.CeilToInt((float)success * hahaClips.Count);
+        hahaAmount = Mathf.CeilToInt((float)success * maxHahaPerText) - 1;
+        hahaPlaced = Mathf.CeilToInt((float)success * hahaPlacements.Count) - 1;
+        hahaClip = Mathf.CeilToInt((float)success * hahaClips.Count) - 1;
 
         currentPlayerRecords.Clear();
     }

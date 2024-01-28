@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public bool canPressSpace = false;
 
 
-    bool isDone = false;
+    bool isDone = false, isTutorial = true;
     void Start()
     {
 
@@ -56,9 +56,47 @@ public class GameManager : MonoBehaviour
 
         //currentMaximumFaceProperties = gameOrder.Count;
 
+        //InitializeNewGuy();
+        StartCoroutine(Tutorial());
+    }
+
+    private IEnumerator Tutorial()
+    {
+        canPressSpace = false;
+
+        GameObject currentGuy = Instantiate(hangingGuyPrefab, new Vector3(spawnPos.position.x, 0.0f, 0.0f), new Quaternion());
+        hangingGuyScript = currentGuy.GetComponent<HaningGuy>();
+        hook = hangingGuyScript.hook;
+        mhar.TriggerSpawnAnimation(hook);
+
+        foreach (var decal in hangingGuyScript.DecalProjectors)
+        {
+            decal.SetActive(true);
+            decal.GetComponent<DecalMover>().isStopped = true;
+            decal.transform.parent.gameObject.SetActive(true);
+        }
+
+        yield return new WaitForSeconds(3.0f);
+
+        foreach (var decal in hangingGuyScript.DecalProjectors)
+        {
+            decal.GetComponent<DecalMover>().MockShowScore();
+        }
+
+        HighscoreManager._instance.CalculateCreatedCharacterScore();
+
+        yield return new WaitForSeconds(1.0f);
+
+        mhar.TriggerMoveAway(hook);
+
+        yield return new WaitForSeconds(6.0f);
+
+        StartCoroutine(GameTimer());
         InitializeNewGuy();
         SetCurrentActiveObject();
-        StartCoroutine(GameTimer());
+
+        canPressSpace = true;
+        isTutorial = false;
     }
 
     private IEnumerator GameTimer ()
@@ -86,6 +124,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isTutorial) return;
+
         if (currentDecalMover.isStopped)
         {
             currentIndex++;

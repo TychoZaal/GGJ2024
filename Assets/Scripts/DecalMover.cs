@@ -125,6 +125,21 @@ public class DecalMover : MonoBehaviour
         UIManager.Instance.SpawnText("+" + score, UIManager.Instance.playerHeadTextLocations[Random.Range(0, UIManager.Instance.playerHeadTextLocations.Count)], UIManager.Instance.pointColors);
     }
 
+    public void MockShowScore()
+    {
+        SoundManager._instance.PlaySound(transform, stitch, 1.0f, 0.2f);
+        ScreenShaker.Instance.StartCoroutine(ScreenShaker.Instance.Shake(0.15f, 0.2f));
+
+        int score = Mathf.RoundToInt(ScoreCalculator.Instance.perfectScore);
+        HighscoreManager._instance.AddScore(new PlayerRecord
+        {
+            playerName = StartGameManager.Instance.playerName,
+            highScore = score
+        });
+
+        UIManager.Instance.SpawnText("+" + score, UIManager.Instance.playerHeadTextLocations[Random.Range(0, UIManager.Instance.playerHeadTextLocations.Count)], UIManager.Instance.pointColors);
+    }
+
     float getCurrentTimeInPosition()
     {
         float result = 0f + (Time.time - this.startTime) * SpeedScalarExponent;
