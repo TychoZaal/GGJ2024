@@ -20,6 +20,7 @@ public class DecalMover : MonoBehaviour
     public Vector3 rotation = Vector3.zero;
     private Vector3 hitPoint = Vector3.positiveInfinity;
     private Vector3 expectedLanding = Vector3.positiveInfinity;
+    private float startY = 0f;
 
     private void OnDrawGizmos()
     {
@@ -46,7 +47,7 @@ public class DecalMover : MonoBehaviour
 
         projector.material = newDecalMaterial;
         startTime = Time.time;
-
+        startY = this.transform.parent.transform.parent.position.y;
         if (category == Asset.Category.MOUTH)
         {
             this.startLocation.position -= new Vector3(0.5f, 0f, 0f);
@@ -55,12 +56,12 @@ public class DecalMover : MonoBehaviour
     }
     private float SpeedScalarExponent => Mathf.Clamp(SpeedScalar * SpeedScalar, 1f, 10f);
     private float SpeedScalar => 1f + Time.timeSinceLevelLoad / 10f;
-
+    private bool debugStop = false;
     void Update()
     {
-        if (isStopped) return;
+        if (isStopped || debugStop) return;
 
-        if (this.transform.position == this.endLocation.position)
+        if (this.transform.position.x == this.endLocation.position.x)
         {
             Vector3 tempLocation = this.startLocation.position;
             this.startLocation.position = this.endLocation.position;
@@ -70,22 +71,32 @@ public class DecalMover : MonoBehaviour
 
         this.transform.Rotate(rotation * SpeedScalarExponent);
 
-        this.transform.position = Vector3.MoveTowards(this.startLocation.position, this.endLocation.position, getCurrentTimeInPosition());
+        Vector3 xStartLocation = new Vector3(this.startLocation.transform.position.x, this.transform.position.y, this.startLocation.transform.position.z);
+        Vector3 xEndLocation = new Vector3(this.endLocation.transform.position.x, this.transform.position.y, this.endLocation.transform.position.z);
 
+        this.transform.position = Vector3.MoveTowards(xStartLocation, xEndLocation, getCurrentTimeInPosition());
+
+        this.transform.position = new Vector3(this.transform.position.x, startY + Mathf.Sin(Time.time) * 0.5f, this.transform.position.z);
         if (Input.GetKeyDown(KeyCode.Space))
         {
             RaycastHit hit;
-            Ray ray = new Ray(this.transform.position, this.transform.forward);
+            Ray ray = new Ray(this.transform.position, this.transform.forward * 100f);
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.transform.gameObject.name != "Head")
+                if (hit.transform.gameObject.name != "Head" && hit.transform.gameObject.name != "Neck")
                 {
+                    Debug.Log("Hit " + hit.transform.gameObject.name);
                     return;
                 }
-                hitPoint = hit.point;
-                ShowScore(hit.point);
+                //hitPoint = hit.point;
+                //ShowScore(hit.point);
 
                 this.isStopped = true;
+            }
+            else
+            {
+                debugStop = true;
+                Debug.Log("Miss");
             }
         }
     }
