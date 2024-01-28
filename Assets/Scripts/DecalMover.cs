@@ -56,7 +56,7 @@ public class DecalMover : MonoBehaviour
             this.endLocation.position += new Vector3(0.5f, 0f, 0f);
         }
     }
-    private float SpeedScalarExponent => Mathf.Clamp(SpeedScalar * SpeedScalar, 1f, 10f);
+    private float SpeedScalarExponent => Mathf.Clamp(SpeedScalar * SpeedScalar, 1f, 16f);
     private float SpeedScalar => 1f + Time.timeSinceLevelLoad / 10f;
     private bool debugStop = false;
     void Update()

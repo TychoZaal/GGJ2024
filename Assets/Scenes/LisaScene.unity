@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -797,7 +797,7 @@ MonoBehaviour:
   currentIndex: 0
   hangingGuyPrefab: {fileID: 4535046467459077067, guid: b0086906a4d9d86449ffd0fe006ce8f1, type: 3}
   hangingGuyScript: {fileID: 0}
-  secondsToPlay: 60
+  secondsToPlay: 45
   secondsPassed: 0
   timeLeftText: {fileID: 1092543341}
   mhar: {fileID: 254255345}
@@ -838,7 +838,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 1.5
-  perfectScore: 1000
+  perfectScore: 2000
 --- !u!114 &276404444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2336,7 +2336,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 60
+  m_text: 45
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c1f36c62ebb064a279d3ea8d9022e69a, type: 2}
   m_sharedMaterial: {fileID: -8164915304440076954, guid: c1f36c62ebb064a279d3ea8d9022e69a, type: 2}

@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
         //currentMaximumFaceProperties = gameOrder.Count;
 
         //InitializeNewGuy();
+        timeLeftText.text = (secondsToPlay - secondsPassed).ToString();
         StartCoroutine(Tutorial());
     }
 

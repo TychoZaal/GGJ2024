@@ -15,4 +15,5 @@ public struct FacialFeature
 {
     public string Name;
     public Vector3 Position;
+    public Vector3 Rotation;
 }
