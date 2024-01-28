@@ -12,4 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e6d8a703ab7140778f32f55e1daf81e, type: 3}
   m_Name: Highscores
   m_EditorClassIdentifier: 
-  highScores: []
+  highScores:
+  - playerName: Kay
+    highScore: 69
+    facialFeatures: []
+  - playerName: Maximus
+    highScore: 12549
+    facialFeatures: []
+  - playerName: 8032
+    highScore: 0
+    facialFeatures: []
+  - playerName: Bali
+    highScore: 9230
+    facialFeatures: []
+  - playerName: Opgeturnt
+    highScore: 13942
+    facialFeatures: []
+  - playerName: Yannick
+    highScore: 12382
+    facialFeatures: []
+  - playerName: Echtespeler123
+    highScore: 12321
+    facialFeatures: []
+  - playerName: Daniel
+    highScore: 24002
+    facialFeatures: []
+  - playerName: Marcus
+    highScore: 28732
+    facialFeatures: []
+  - playerName: Lisette
+    highScore: 17420
+    facialFeatures: []

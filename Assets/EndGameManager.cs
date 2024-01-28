@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EndGameManager : MonoBehaviour
 {
@@ -10,6 +11,12 @@ public class EndGameManager : MonoBehaviour
     private void Start()
     {
         name.text = StartGameManager.Instance.playerName;
-        score.text = HighscoreManager._instance.GetHighscore().ToString() + " laugs!";
+        score.text = HighscoreManager._instance.GetHighscore().ToString() + " laughs!";
+        Invoke("ShowHighscores", 3.0f);
+    }
+
+    void ShowHighscores()
+    {
+        SceneManager.LoadScene("HighscoreOverview");
     }
 }
