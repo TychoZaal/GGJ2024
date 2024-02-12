@@ -965,7 +965,7 @@ MonoBehaviour:
   currentIndex: 0
   hangingGuyPrefab: {fileID: 4535046467459077067, guid: b0086906a4d9d86449ffd0fe006ce8f1, type: 3}
   hangingGuyScript: {fileID: 0}
-  secondsToPlay: 35
+  secondsToPlay: 45
   secondsPassed: 0
   timeLeftText: {fileID: 1092543341}
   mhar: {fileID: 254255345}
@@ -973,6 +973,14 @@ MonoBehaviour:
   belt: {fileID: 8300000, guid: 4d1a55018a9934b67b983d720a2c33e2, type: 3}
   currentMaximumFaceProperties: 0
   gameSpeed: 1
+  slowdownLength: 2
+  slowdownFactor: 0.075
+  scaleUpAmount: 1.7
+  scaleDownAmount: 1
+  scaleSpeed: 25
+  tick: {fileID: 8300000, guid: 8a6723cbc84854bc2bdc90939201934a, type: 3}
+  whistle: {fileID: 8300000, guid: ff553711b743e48d2afaaf0395c89212, type: 3}
+  bgm: {fileID: 276404447}
   canPressSpace: 0
 --- !u!4 &276404442
 Transform:
@@ -1106,7 +1114,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.2
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -2481,7 +2489,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1, y: 15}
+  m_AnchoredPosition: {x: -1, y: 31}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1092543341
@@ -2504,7 +2512,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 45
+  m_text: 5
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c1f36c62ebb064a279d3ea8d9022e69a, type: 2}
   m_sharedMaterial: {fileID: -8164915304440076954, guid: c1f36c62ebb064a279d3ea8d9022e69a, type: 2}

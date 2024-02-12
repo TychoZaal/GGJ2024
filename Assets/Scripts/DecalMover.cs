@@ -81,7 +81,7 @@ public class DecalMover : MonoBehaviour
         this.transform.position = new Vector3(this.transform.position.x, startY + Mathf.Sin(Time.time) * 0.5f, this.transform.position.z);
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (!GameManager.Instance.canPressSpace) return;
+            if (!GameManager.Instance.canPressSpace) return;    
             RaycastHit hit;
             Ray ray = new Ray(this.transform.position, this.transform.forward * 100f);
             if (Physics.Raycast(ray, out hit))

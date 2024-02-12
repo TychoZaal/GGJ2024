@@ -40,7 +40,20 @@ public class GameManager : MonoBehaviour
 
     public int currentMaximumFaceProperties = 0;
     public float gameSpeed = 1f;
+    public float slowdownLength = 2.0f;
+    public float slowdownFactor = 0.075f;
     // Start is called before the first frame update
+
+    public float scaleUpAmount = 2.0f;
+    public float scaleDownAmount = 0.5f;
+    public float scaleSpeed = 1.0f;
+
+    private Vector3 originalScale;
+    private bool isScalingUp = false;
+    private bool shouldScale = false;
+
+    public AudioClip tick, whistle;
+    public AudioSource bgm;
 
     [HideInInspector] public bool canPressSpace = false;
 
@@ -59,6 +72,7 @@ public class GameManager : MonoBehaviour
         //InitializeNewGuy();
         timeLeftText.text = (secondsToPlay - secondsPassed).ToString();
         StartCoroutine(Tutorial());
+        originalScale = timeLeftText.transform.localScale;
     }
 
     private IEnumerator Tutorial()
@@ -109,17 +123,42 @@ public class GameManager : MonoBehaviour
         {
             yield return new WaitForSeconds(1);
             secondsPassed += 1;
+            StartScalingUp();
+            SoundManager._instance.PlaySound(transform, tick, 0.85f, 0.1f);
+
+            if (secondsPassed / secondsToPlay > 0.60f)
+            {
+                bgm.pitch = 1.5f;
+            }
+            if (secondsPassed / secondsToPlay > 0.80f)
+            {
+                bgm.pitch = 1.8f;
+            }
 
             timeLeftText.text = (secondsToPlay - secondsPassed).ToString();
         }
 
-        EndGame();
+        StartCoroutine(EndGame());
     }
 
-    private void EndGame()
+    private IEnumerator EndGame()
     {
-        timeLeftText.text = string.Empty;
+        timeLeftText.text = "0";
         HighscoreManager._instance.StoreHighestScore();
+        SoundManager._instance.PlaySound(transform, whistle, 0.7f);
+
+        float t = 0;
+        while (t < slowdownLength)
+        {
+            Time.timeScale = Mathf.Lerp(1f, slowdownFactor, t / slowdownLength);
+            t += Time.unscaledDeltaTime;
+            yield return null;
+        }
+        Time.timeScale = slowdownFactor;
+
+        yield return new WaitForSecondsRealtime(1.0f);
+
+        Time.timeScale = 1.0f;
         SceneManager.LoadScene("GameEnd");
     }
 
@@ -145,6 +184,26 @@ public class GameManager : MonoBehaviour
             else
             {
                 SetCurrentActiveObject();
+            }
+        }
+
+        if (shouldScale)
+        {
+            if (isScalingUp)
+            {
+                timeLeftText.transform.localScale = Vector3.Lerp(timeLeftText.transform.localScale, originalScale * scaleUpAmount, Time.deltaTime * scaleSpeed);
+                if (Vector3.Distance(timeLeftText.transform.localScale, originalScale * scaleUpAmount) < 0.01f)
+                {
+                    isScalingUp = false;
+                }
+            }
+            else
+            {
+                timeLeftText.transform.localScale = Vector3.Lerp(timeLeftText.transform.localScale, originalScale * scaleDownAmount, Time.deltaTime * scaleSpeed);
+                if (Vector3.Distance(timeLeftText.transform.localScale, originalScale * scaleDownAmount) < 0.01f)
+                {
+                    shouldScale = false;
+                }
             }
         }
     }
@@ -173,5 +232,16 @@ public class GameManager : MonoBehaviour
     {
         currentDecalMover = gameOrder[currentIndex].GetComponent<DecalMover>();
         gameOrder[currentIndex].transform.parent.gameObject.SetActive(true);
+    }
+
+    public void StartScalingUp()
+    {
+        isScalingUp = true;
+        shouldScale = true;
+    }
+
+    public void StartScalingDown()
+    {
+        isScalingUp = false;
     }
 }
