@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class AssetManager : MonoBehaviour
 {
+    [SerializeField]
     private List<Asset> assets = new List<Asset>();
 
     private string nosePath = "Art/FaceParts/Noses";
@@ -35,7 +36,7 @@ public class AssetManager : MonoBehaviour
         var textures = Resources.LoadAll(resourcePath, typeof(Texture2D));
         foreach (var texture in textures)
         {
-              //new asset with name, category, and texture
+            //new asset with name, category, and texture
             Asset newAsset = new Asset();
             newAsset.name = texture.name;
             newAsset.category = cat;
